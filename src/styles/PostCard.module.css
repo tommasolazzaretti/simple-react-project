@@ -13,3 +13,16 @@
     height: 15rem;
     transition: ease 0.5s;
 }
+
+.chipsGroup{
+    justify-content: space-between;
+    display: flex;
+}
+
+.chips {
+    border-radius: 10px;
+    font-size: 0.7rem;
+    background-color: royalblue;
+    color: white;
+    padding: 0.2rem 1rem;
+}

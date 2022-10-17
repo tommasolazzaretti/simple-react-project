@@ -15,9 +15,13 @@ export default function PostCard({text, image, publishDate, tags}: Partial<PostD
                 <p className="card-text">
                     {publishDate}
                 </p>
-                <p className="card-text">
-                    {tags}
-                </p>
+                <div className={css.chipsGroup}>
+                    {
+                        tags?.map(value => {
+                            return <span key={value} className={css.chips}>{value}</span>
+                        })
+                    }
+                </div>
             </div>
         </div>
     )

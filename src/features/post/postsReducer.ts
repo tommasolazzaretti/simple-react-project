@@ -1,13 +1,13 @@
-import { createReducer } from '@reduxjs/toolkit';
+import {createReducer} from '@reduxjs/toolkit';
 import PostDetail from "../../global/model/Post";
-import {GET_POSTS_LIST, GET_POST_DETAILS} from "./postsAction";
-import BackendService from "../../services/BackendService";
+import {GET_POST_DETAILS, GET_POSTS_LIST} from "./postsAction";
+import Pagination from "../../global/model/Pagination";
 
 // declaring the types for our state
 export type PostsListState = {
     posts: PostDetail[];
     postDetail: PostDetail | null;
-    pagination: any;
+    pagination: Pagination;
     pending: boolean;
     error: boolean;
 };
@@ -15,7 +15,12 @@ export type PostsListState = {
 const initialState: PostsListState = {
     posts: [],
     postDetail: null,
-    pagination: {},
+    pagination: {
+        page: 0,
+        total: 0,
+        limit: 15,
+        totalPages: 0
+    },
     pending: false,
     error: false,
 };
@@ -25,10 +30,15 @@ export const postReducer = createReducer(initialState, builder => {
         .addCase(GET_POSTS_LIST.pending, state => {
             state.pending = true;
         })
-        .addCase(GET_POSTS_LIST.fulfilled, (state, { payload }) => {
+        .addCase(GET_POSTS_LIST.fulfilled, (state, {payload}) => {
             state.pending = false;
             state.posts = payload.data;
-            state.pagination = payload.pagination;
+            state.pagination = {
+                page: payload.page,
+                total: payload.total,
+                limit: payload.limit,
+                totalPages: Math.floor(payload.limit / payload.total)
+            };
         })
         .addCase(GET_POSTS_LIST.rejected, state => {
             state.pending = false;
