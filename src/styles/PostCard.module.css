@@ -26,3 +26,12 @@
     color: white;
     padding: 0.2rem 1rem;
 }
+
+.separator {
+    border-bottom: 1px solid grey;
+    margin: 1.75rem 0;
+}
+
+.action {
+
+}

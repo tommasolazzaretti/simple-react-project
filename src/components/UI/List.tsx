@@ -24,6 +24,7 @@ const List: React.FC = () => {
                 <div key={`PostCard_div_${index}`} className={"col-12 col-md-6 col-lg-4 p-md-3"}>
                     <PostCard
                         key={`PostCard_${index}`}
+                        id={post.id}
                         text={post.text}
                         image={post.image}
                         publishDate={post.publishDate}

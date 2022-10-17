@@ -1,0 +1,22 @@
+
+.modalWrapper {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.modalContent {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 75%;
+    width: 75%;
+    border-radius: 5px;
+    padding: 1rem;
+    transform: translate(-50%, -50%);
+    background-color: #17b711;
+}

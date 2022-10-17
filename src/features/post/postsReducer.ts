@@ -44,7 +44,15 @@ export const postReducer = createReducer(initialState, builder => {
             state.pending = false;
             state.error = true;
         })
-        .addCase(GET_POST_DETAILS, state => {
-            state.postDetail = state.postDetail;
+        .addCase(GET_POST_DETAILS.pending, state => {
+            state.pending = true;
+        })
+        .addCase(GET_POST_DETAILS.fulfilled, (state, {payload}) => {
+            state.pending = false;
+            state.postDetail = payload.data;
+        })
+        .addCase(GET_POST_DETAILS.rejected, state => {
+            state.pending = false;
+            state.error = true;
         })
 });

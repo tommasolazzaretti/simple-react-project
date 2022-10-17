@@ -2,6 +2,9 @@ import type {NextPage} from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import List from "../components/UI/List";
+import Link from "next/link";
+import Modal from "../components/UI/Modal";
+import React from "react";
 
 const IndexPage: NextPage = () => {
     return (
@@ -12,12 +15,26 @@ const IndexPage: NextPage = () => {
             </Head>
 
             <div className="container">
-                <h1 className="py-5">
-                    All users post
-                </h1>
-                <List/>
-            </div>
+                <div className="row">
+                    <div className="col-12 col-md-6 py-md-5">
+                        <h1>
+                            All users post
+                        </h1>
+                    </div>
+                    <div className="col-12 col-md-6 py-md-5 d-flex justify-content-end">
+                        <button type="button" className="btn btn-primary">
+                            <Link href="/postDetail">ADD NEW POST</Link>
+                        </button>
+                    </div>
+                    <div className="col-12">
+                        <List/>
+                    </div>
 
+                    <Modal isOpen={false}>
+                        modal content children
+                    </Modal>
+                </div>
+            </div>
         </div>
     )
 }
