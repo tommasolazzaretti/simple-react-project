@@ -1,0 +1,15 @@
+
+.cardPost {
+    cursor: pointer;
+}
+
+.cardPost:hover {
+    box-shadow: 0px 0px 3px 5px #17b711;
+    transition: ease-in-out .5s;
+}
+
+.cardImage {
+    object-fit: cover;
+    height: 15rem;
+    transition: ease 0.5s;
+}
