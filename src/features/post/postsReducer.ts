@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import PostDetail from "../../global/model/Post";
-import {GET_POST_DETAILS, GET_POSTS_LIST} from "./postsAction";
+import {CREATE_POST, DELETE_POST, GET_POST_DETAILS, GET_POSTS_LIST, UPDATE_POST} from "./postsAction";
 import Pagination from "../../global/model/Pagination";
 
 // declaring the types for our state
@@ -52,6 +52,36 @@ export const postReducer = createReducer(initialState, builder => {
             state.postDetail = payload.data;
         })
         .addCase(GET_POST_DETAILS.rejected, state => {
+            state.pending = false;
+            state.error = true;
+        })
+        .addCase(CREATE_POST.pending, state => {
+            state.pending = true;
+        })
+        .addCase(CREATE_POST.fulfilled, (state) => {
+            state.pending = false;
+        })
+        .addCase(CREATE_POST.rejected, state => {
+            state.pending = false;
+            state.error = true;
+        })
+        .addCase(DELETE_POST.pending, state => {
+            state.pending = true;
+        })
+        .addCase(DELETE_POST.fulfilled, (state) => {
+            state.pending = false;
+        })
+        .addCase(DELETE_POST.rejected, state => {
+            state.pending = false;
+            state.error = true;
+        })
+        .addCase(UPDATE_POST.pending, state => {
+            state.pending = true;
+        })
+        .addCase(UPDATE_POST.fulfilled, (state) => {
+            state.pending = false;
+        })
+        .addCase(UPDATE_POST.rejected, state => {
             state.pending = false;
             state.error = true;
         })
