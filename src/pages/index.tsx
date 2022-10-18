@@ -3,7 +3,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import List from "../components/UI/List";
 import Link from "next/link";
-import Modal from "../components/UI/Modal";
 import React from "react";
 
 const IndexPage: NextPage = () => {
@@ -29,10 +28,6 @@ const IndexPage: NextPage = () => {
                     <div className="col-12">
                         <List/>
                     </div>
-
-                    <Modal isOpen={false}>
-                        modal content children
-                    </Modal>
                 </div>
             </div>
         </div>

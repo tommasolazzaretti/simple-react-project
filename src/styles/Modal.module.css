@@ -13,10 +13,16 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    height: 75%;
+    height: 50%;
     width: 75%;
     border-radius: 5px;
     padding: 1rem;
     transform: translate(-50%, -50%);
-    background-color: #17b711;
+    background-color: white;
+}
+
+@media (min-width: 900px) {
+    .modalContent {
+        width: 50%;
+    }
 }

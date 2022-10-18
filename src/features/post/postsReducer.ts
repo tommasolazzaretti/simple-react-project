@@ -1,12 +1,20 @@
 import {createReducer} from '@reduxjs/toolkit';
 import PostDetail from "../../global/model/Post";
-import {CREATE_POST, DELETE_POST, GET_POST_DETAILS, GET_POSTS_LIST, UPDATE_POST} from "./postsAction";
+import {
+    CREATE_POST,
+    DELETE_POST,
+    GET_POST_DETAILS,
+    GET_POSTS_LIST,
+    SET_SELECTED_POST_ID,
+    UPDATE_POST
+} from "./postsAction";
 import Pagination from "../../global/model/Pagination";
 
 // declaring the types for our state
 export type PostsListState = {
     posts: PostDetail[];
     postDetail: PostDetail | null;
+    selectedId: string;
     pagination: Pagination;
     pending: boolean;
     error: boolean;
@@ -15,6 +23,7 @@ export type PostsListState = {
 const initialState: PostsListState = {
     posts: [],
     postDetail: null,
+    selectedId: '',
     pagination: {
         page: 0,
         total: 0,
@@ -81,8 +90,7 @@ export const postReducer = createReducer(initialState, builder => {
         .addCase(UPDATE_POST.fulfilled, (state) => {
             state.pending = false;
         })
-        .addCase(UPDATE_POST.rejected, state => {
-            state.pending = false;
-            state.error = true;
+        .addCase(SET_SELECTED_POST_ID, (state, action) => {
+            state.selectedId = action.payload as unknown as string;
         })
 });

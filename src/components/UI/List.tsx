@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../features/hooks";
-import {GET_POSTS_LIST} from "../../features/post/postsAction";
+import {DELETE_POST, GET_POSTS_LIST} from "../../features/post/postsAction";
 import {postsList} from "../../features/post/postsSelectors";
 import PostCard from "./PostCard";
 import Loader from "./Loader";
+import Modal from "./Modal";
 
 const List: React.FC = () => {
 
@@ -11,14 +12,21 @@ const List: React.FC = () => {
     const {
         posts,
         pending,
-        pagination
+        pagination,
+        selectedId
     } = useAppSelector(postsList);
+    const [openModal, setOpenModal] = useState(false);
 
-    function callGetPosts() {
+    function callDeletePost() {
+        dispatch(DELETE_POST({selectedId}));
+        setOpenModal(false);
+    }
+
+    let callGetPosts = () => {
         dispatch(GET_POSTS_LIST({pagination}));
     }
 
-    function setPage(page: number) {
+    let setPage = (page: number) => {
         dispatch(GET_POSTS_LIST({
             ...pagination,
             page: page
@@ -40,6 +48,7 @@ const List: React.FC = () => {
                         image={post.image}
                         publishDate={post.publishDate}
                         tags={post.tags}
+                        deleteAction={() => setOpenModal(true)}
                     />
                 </div>
             )
@@ -83,6 +92,14 @@ const List: React.FC = () => {
                     </li>
                 </ul>
             </nav>
+
+            <Modal
+                isOpen={openModal}
+                onContinue={() => callDeletePost()}
+                onClose={() => setOpenModal(false)}
+            >
+                Are you sure to delete item : {selectedId}
+            </Modal>
         </>
     )
 }
