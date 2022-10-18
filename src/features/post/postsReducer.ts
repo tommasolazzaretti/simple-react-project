@@ -37,7 +37,7 @@ export const postReducer = createReducer(initialState, builder => {
                 page: payload.page,
                 total: payload.total,
                 limit: payload.limit,
-                totalPages: Math.floor(payload.limit / payload.total)
+                totalPages: Math.floor(payload.total / payload.limit)
             };
         })
         .addCase(GET_POSTS_LIST.rejected, state => {

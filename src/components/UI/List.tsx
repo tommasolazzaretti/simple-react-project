@@ -14,8 +14,19 @@ const List: React.FC = () => {
         pagination
     } = useAppSelector(postsList);
 
+    function callGetPosts() {
+        dispatch(GET_POSTS_LIST({pagination}));
+    }
+
+    function setPage(page: number) {
+        dispatch(GET_POSTS_LIST({
+            ...pagination,
+            page: page
+        }));
+    }
+
     useEffect(() => {
-        dispatch(GET_POSTS_LIST());
+        callGetPosts();
     }, []);
 
     let returnPostsList = () => {
@@ -40,7 +51,9 @@ const List: React.FC = () => {
         for (let i = 0; i < 5; i++) {
             elements.push(
                 <li key={`li_${i}`} className="page-item">
-                    <a key={`a_${i}`} className="page-link" href="#">{pagination.page + i}</a>
+                    <a key={`a_${i}`} className="page-link" onClick={() => setPage(pagination.page + i)}>
+                        {pagination.page + i + 1}
+                    </a>
                 </li>
             );
         }
@@ -56,7 +69,7 @@ const List: React.FC = () => {
             <nav aria-label="Page navigation example">
                 <ul className="pagination">
                     <li className="page-item">
-                        <a className="page-link" href="#" aria-label="Previous">
+                        <a className="page-link" aria-label="Previous" onClick={() => setPage(0)}>
                             <span className="sr-only">First</span>
                         </a>
                     </li>
@@ -64,7 +77,7 @@ const List: React.FC = () => {
                         paginationPages()
                     }
                     <li className="page-item">
-                        <a className="page-link" href="#" aria-label="Next">
+                        <a className="page-link" aria-label="Next" onClick={() => setPage(pagination.totalPages)}>
                             <span className="sr-only">Last</span>
                         </a>
                     </li>
